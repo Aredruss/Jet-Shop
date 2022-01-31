@@ -11,7 +11,7 @@ class ProductRepository(
             val response = api.getCategories()
             response ?:  throw Exception("Error getting categories")
         }.onSuccess { result ->
-            Result.success(result)
+            Result.success(result.sorted())
         }.onFailure { error ->
             Result.failure<Throwable>(error)
         }

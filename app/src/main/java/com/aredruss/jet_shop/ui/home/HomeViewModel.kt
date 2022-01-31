@@ -8,9 +8,6 @@ import com.aredruss.jet_shop.domain.ProductRepository
 import com.aredruss.jet_shop.domain.ShopPreferences
 import com.aredruss.jet_shop.helpers.Event
 import com.aredruss.jet_shop.helpers.update
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HomeViewModel(

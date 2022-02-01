@@ -10,13 +10,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val homeViewModel: HomeViewModel by viewModel()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             JetShopTheme {
-                HomeScreen(homeViewModel)
+                HomeScreen()
             }
         }
     }

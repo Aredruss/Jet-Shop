@@ -64,7 +64,7 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
 
-    def koin_version= "3.1.5"
+    def koin_version = "3.1.5"
     implementation "io.insert-koin:koin-android:$koin_version"
     implementation "io.insert-koin:koin-androidx-compose:$koin_version"
 
@@ -86,4 +86,6 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:1.4.0")
 
+    def accompanist_version = "0.24.1-alpha"
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
 }

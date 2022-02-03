@@ -60,7 +60,6 @@ fun HomeScreen() {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

@@ -8,8 +8,7 @@ class ProductRepository(
 ) {
     suspend fun getAllCategories(): Result<List<String>> {
         return runCatching {
-            val response = api.getCategories()
-            response ?:  throw Exception("Error getting categories")
+            api.getCategories()
         }.onSuccess { result ->
             Result.success(result.sorted())
         }.onFailure { error ->
@@ -19,8 +18,7 @@ class ProductRepository(
 
     suspend fun getProductsForCategory(category: String): Result<List<Product>> {
         return runCatching {
-            val response = api.getProductsInCategory(category)
-            response ?:  throw Exception("Error getting products in category $category")
+            api.getProductsInCategory(category)
         }.onSuccess { result ->
             Result.success(result)
         }.onFailure { error ->
@@ -30,7 +28,7 @@ class ProductRepository(
 
     suspend fun getProduct(productId: Int): Result<Product> {
         return runCatching {
-            api.getProduct(productId) ?: throw Exception("Error getting product $productId")
+            api.getProduct(productId)
         }.onSuccess { result ->
             Result.success(result)
         }.onFailure { error ->

@@ -1,6 +1,5 @@
-package com.aredruss.jet_shop.ui.home
+package com.aredruss.jet_shop.ui.category
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,10 +9,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.aredruss.jet_shop.ui.theme.JetShopTheme
 
 @Composable
-fun TopCard() {
+fun CategoryTopCard(title: String) {
     Surface(
         color = MaterialTheme.colors.primaryVariant,
         modifier = Modifier.fillMaxWidth(),
@@ -22,20 +23,19 @@ fun TopCard() {
         Row(
             modifier = Modifier.padding(all = 15.dp),
         ) {
-            Column {
-                Text(
-                    text = "Hello, Alex",
-                    style = MaterialTheme.typography.h1,
-                    color = Color.White
-                )
-                Text(
-                    text = "Welcome to the\nJetShop",
-                    style = MaterialTheme.typography.h2,
-                    color = Color.White
-                )
-            }
-
+            Text(
+                text = title,
+                style = MaterialTheme.typography.h1,
+                color = Color.White
+            )
         }
+    }
+}
 
+@Preview
+@Composable
+fun CategoryTopCardPreview() {
+    JetShopTheme {
+        CategoryTopCard("Electronics")
     }
 }

@@ -1,9 +1,10 @@
-package com.aredruss.jet_shop.ui.home
+package com.aredruss.jet_shop.ui.category
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -15,9 +16,9 @@ import com.aredruss.jet_shop.ui.theme.JetShopTheme
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun HomeScreen() {
-    val homeViewModel = getViewModel<HomeViewModel>()
-    val homeState: HomeState by homeViewModel.homeState.collectAsState()
+fun CategoryScreen() {
+    val categoryViewModel = getViewModel<CategoryViewModel>()
+    val categoryState: CategoryState by categoryViewModel.categoryState.collectAsState()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -25,23 +26,21 @@ fun HomeScreen() {
     ) {
         Scaffold(
             topBar = {
-                GreetingTopCard()
+                CategoryTopCard(title = "Electronics")
             },
             content = {
                 when {
-                    homeState.loading -> Loader()
-                    homeState.error -> {
+                    categoryState.loading -> Loader()
+                    categoryState.error -> {
                         ErrorCard(
-                            error = homeState.message ?: "Something went wrong",
-                            action = homeViewModel::getCategories
+                            error = categoryState.message ?: "Something went wrong",
+                            action = categoryViewModel::loadCategories
                         )
                     }
-                    else -> CategoryList(list = homeState.categories)
-
+                    else -> {
+                        Text(text = categoryState.products.toString())
+                    }
                 }
-            },
-            bottomBar = {
-                BottomLabel()
             }
         )
     }
@@ -51,6 +50,6 @@ fun HomeScreen() {
 @Composable
 fun DefaultPreview() {
     JetShopTheme {
-        CategoryItem(title = "Electronics")
+        CategoryScreen()
     }
 }

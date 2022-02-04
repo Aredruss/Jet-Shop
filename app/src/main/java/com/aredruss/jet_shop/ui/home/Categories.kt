@@ -19,9 +19,8 @@ import androidx.compose.ui.unit.sp
 import com.aredruss.jet_shop.ui.theme.DarkTransparentGrey
 import com.aredruss.jet_shop.ui.theme.LightTransparentGrey
 
-
 @Composable
-fun CategoryList(list: List<String>) {
+fun CategoryList(list: List<String>, action: (String) -> Unit) {
     Column {
         Text(
             text = "Explore what we have to offer you:",
@@ -31,7 +30,7 @@ fun CategoryList(list: List<String>) {
         LazyColumn(
             content = {
                 items(list) { category ->
-                    CategoryItem(title = category)
+                    CategoryItem(title = category, action)
                 }
             },
         )
@@ -39,7 +38,7 @@ fun CategoryList(list: List<String>) {
 }
 
 @Composable
-fun CategoryItem(title: String) {
+fun CategoryItem(title: String, action: (String) -> Unit) {
     Surface(
         color = if (isSystemInDarkTheme()) {
             DarkTransparentGrey
@@ -54,7 +53,7 @@ fun CategoryItem(title: String) {
             )
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .clickable { }
+            .clickable { action(title) }
     ) {
         Text(
             modifier = Modifier.padding(15.dp),

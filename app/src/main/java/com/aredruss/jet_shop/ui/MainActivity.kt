@@ -3,10 +3,13 @@ package com.aredruss.jet_shop.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.Composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.aredruss.jet_shop.ui.category.CategoryScreen
 import com.aredruss.jet_shop.ui.home.HomeScreen
-import com.aredruss.jet_shop.ui.home.HomeViewModel
 import com.aredruss.jet_shop.ui.theme.JetShopTheme
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -14,8 +17,28 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetShopTheme {
-                HomeScreen()
+                Host()
             }
         }
     }
 }
+
+@Composable
+fun Host() {
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = "home"
+    ) {
+        composable(route = "home") {
+            HomeScreen(navController = navController)
+        }
+        composable(route = "category/{name}") { navBackStackEntry ->
+            CategoryScreen(
+                navController = navController,
+                category = navBackStackEntry.arguments?.getString("name") ?: "electronics"
+            )
+        }
+    }
+}
+

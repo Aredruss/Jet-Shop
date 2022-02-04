@@ -16,7 +16,7 @@ fun Loader() {
             .fillMaxHeight()
             .fillMaxWidth()
             .padding(100.dp),
-        strokeWidth = 10.dp,
+        strokeWidth = 15.dp,
         color = MaterialTheme.colors.primaryVariant
     )
 }

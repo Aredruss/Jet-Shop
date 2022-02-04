@@ -4,20 +4,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.aredruss.jet_shop.ui.common.ErrorCard
 import com.aredruss.jet_shop.ui.common.Loader
-import com.aredruss.jet_shop.ui.theme.JetShopTheme
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
-fun CategoryScreen() {
-    val categoryViewModel = getViewModel<CategoryViewModel>()
+fun CategoryScreen(
+    navController: NavController,
+    category: String
+) {
+    val categoryViewModel = getViewModel<CategoryViewModel> { parametersOf(category) }
     val categoryState: CategoryState by categoryViewModel.categoryState.collectAsState()
 
     Surface(
@@ -38,18 +40,10 @@ fun CategoryScreen() {
                         )
                     }
                     else -> {
-                        Text(text = categoryState.products.toString())
+                        ProductList(list = categoryState.products)
                     }
                 }
             }
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    JetShopTheme {
-        CategoryScreen()
     }
 }

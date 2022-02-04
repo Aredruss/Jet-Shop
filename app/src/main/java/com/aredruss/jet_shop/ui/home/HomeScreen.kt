@@ -9,13 +9,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.aredruss.jet_shop.ui.common.ErrorCard
 import com.aredruss.jet_shop.ui.common.Loader
 import com.aredruss.jet_shop.ui.theme.JetShopTheme
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     val homeViewModel = getViewModel<HomeViewModel>()
     val homeState: HomeState by homeViewModel.homeState.collectAsState()
 
@@ -36,8 +37,9 @@ fun HomeScreen() {
                             action = homeViewModel::getCategories
                         )
                     }
-                    else -> CategoryList(list = homeState.categories)
-
+                    else -> CategoryList(list = homeState.categories) {
+                        navController.navigate("category/$it")
+                    }
                 }
             },
             bottomBar = {
@@ -51,6 +53,6 @@ fun HomeScreen() {
 @Composable
 fun DefaultPreview() {
     JetShopTheme {
-        CategoryItem(title = "Electronics")
+        CategoryItem(title = "Electronics"){}
     }
 }

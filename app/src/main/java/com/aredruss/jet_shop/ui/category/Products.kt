@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -33,9 +34,11 @@ import com.aredruss.jet_shop.ui.theme.LightTransparentGrey
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ProductList(list: List<Product>) {
+    val listState = rememberLazyListState()
     LazyVerticalGrid(
         cells = GridCells.Fixed(2),
-        contentPadding = PaddingValues(5.dp)
+        contentPadding = PaddingValues(5.dp),
+        state = listState
     ) {
         items(list) { item ->
             ProductItem(product = item)

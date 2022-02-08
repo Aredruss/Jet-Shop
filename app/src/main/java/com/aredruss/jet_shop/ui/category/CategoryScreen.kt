@@ -25,7 +25,6 @@ fun CategoryScreen(
 ) {
     val categoryViewModel = getViewModel<CategoryViewModel> { parametersOf(category) }
     val categoryState: CategoryState by categoryViewModel.categoryState.collectAsState()
-    val scrollBehavior = remember { TopAppBarDefaults.enterAlwaysScrollBehavior() }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -33,7 +32,7 @@ fun CategoryScreen(
     ) {
         Scaffold(
             topBar = {
-                     CategoryTopCard(title = category)
+                CategoryTopCard(title = category)
             },
             content = {
                 when {

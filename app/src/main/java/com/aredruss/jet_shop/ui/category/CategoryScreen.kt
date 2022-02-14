@@ -5,13 +5,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.aredruss.jet_shop.helpers.safeNavigate
 import com.aredruss.jet_shop.ui.common.ErrorCard
 import com.aredruss.jet_shop.ui.common.Loader
 import org.koin.androidx.compose.getViewModel
@@ -44,7 +43,9 @@ fun CategoryScreen(
                         )
                     }
                     else -> {
-                        ProductList(list = categoryState.products)
+                        ProductList(list = categoryState.products, action = { id ->
+                            navController.safeNavigate("product/$id")
+                        })
                     }
                 }
             }

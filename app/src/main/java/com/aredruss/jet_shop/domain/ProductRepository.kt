@@ -23,7 +23,7 @@ class ProductRepository(
         }
     }
 
-    suspend fun getProduct(productId: Int): Result<Product> {
+    suspend fun getProduct(productId: String): Result<Product> {
         return runCatching {
             api.getProduct(productId)
         }.onFailure {

@@ -33,7 +33,7 @@ import com.aredruss.jet_shop.ui.theme.LightTransparentGrey
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ProductList(list: List<Product>) {
+fun ProductList(list: List<Product>, action: (String) -> Unit) {
     val listState = rememberLazyListState()
     LazyVerticalGrid(
         cells = GridCells.Fixed(2),
@@ -41,13 +41,13 @@ fun ProductList(list: List<Product>) {
         state = listState
     ) {
         items(list) { item ->
-            ProductItem(product = item)
+            ProductItem(product = item, action = action)
         }
     }
 }
 
 @Composable
-fun ProductItem(product: Product) {
+fun ProductItem(product: Product, action: (String) -> Unit) {
     Surface(
         color = if (isSystemInDarkTheme()) {
             DarkTransparentGrey
@@ -57,7 +57,7 @@ fun ProductItem(product: Product) {
         modifier = Modifier
             .padding(15.dp)
             .clip(RoundedCornerShape(10.dp))
-            .clickable { }
+            .clickable { action(product.id.toString()) }
     ) {
         Column(
             modifier = Modifier

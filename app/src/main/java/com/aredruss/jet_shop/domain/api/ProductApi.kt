@@ -13,7 +13,7 @@ interface ProductApi {
     suspend fun getProductsInCategory(@Path("category") category: String): List<Product>
 
     @GET("/products/{productId}")
-    suspend fun getProduct(@Path("productId") productId: Int): Product
+    suspend fun getProduct(@Path("productId") productId: String): Product
 
     companion object {
         const val BASE_URL = "https://fakestoreapi.com/"

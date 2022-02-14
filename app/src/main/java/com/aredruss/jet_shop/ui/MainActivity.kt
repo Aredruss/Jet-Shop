@@ -7,9 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.aredruss.jet_shop.domain.ShopPreferences
 import com.aredruss.jet_shop.ui.category.CategoryScreen
 import com.aredruss.jet_shop.ui.home.HomeScreen
+import com.aredruss.jet_shop.ui.onboarding.OnBoardingScreen
+import com.aredruss.jet_shop.ui.product.ProductScreen
 import com.aredruss.jet_shop.ui.theme.JetShopTheme
+import org.koin.androidx.compose.get
 
 class MainActivity : ComponentActivity() {
 
@@ -17,21 +21,34 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetShopTheme {
-                Host()
+                Host(finishAction = this::finish)
             }
         }
     }
 }
 
 @Composable
-fun Host() {
+fun Host(
+    prefs: ShopPreferences = get(),
+    finishAction: () -> Unit
+) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = "home"
+        startDestination = if (prefs.onBoardingShown) {
+            "home"
+        } else {
+            "onboarding"
+        }
     ) {
+        composable("onboarding") {
+            OnBoardingScreen(navController = navController)
+        }
         composable(route = "home") {
-            HomeScreen(navController = navController)
+            HomeScreen(
+                navController = navController,
+                finishAction = finishAction
+            )
         }
         composable(route = "category/{name}") { navBackStackEntry ->
             CategoryScreen(
@@ -39,6 +56,10 @@ fun Host() {
                 category = navBackStackEntry.arguments?.getString("name") ?: "electronics"
             )
         }
+        composable(route = "product/{id}") { navBackStackEntry ->
+            ProductScreen(
+                productId = navBackStackEntry.arguments?.getString("id") ?: "1"
+            )
+        }
     }
 }
-

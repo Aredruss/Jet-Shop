@@ -1,5 +1,6 @@
 package com.aredruss.jet_shop.ui.home
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -16,9 +17,16 @@ import com.aredruss.jet_shop.ui.theme.JetShopTheme
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(
+    navController: NavController,
+    finishAction: () -> Unit
+) {
     val homeViewModel = getViewModel<HomeViewModel>()
     val homeState: HomeState by homeViewModel.homeState.collectAsState()
+
+    BackHandler {
+        finishAction()
+    }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -53,6 +61,6 @@ fun HomeScreen(navController: NavController) {
 @Composable
 fun DefaultPreview() {
     JetShopTheme {
-        CategoryItem(title = "Electronics"){}
+        CategoryItem(title = "Electronics") {}
     }
 }

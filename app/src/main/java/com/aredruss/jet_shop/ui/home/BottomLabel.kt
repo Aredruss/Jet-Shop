@@ -18,7 +18,8 @@ import com.aredruss.jet_shop.ui.theme.Purple500
 @Composable
 fun BottomLabel() {
     Surface(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        color = Purple500
     ) {
         Row(
             modifier = Modifier
@@ -30,10 +31,7 @@ fun BottomLabel() {
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h4,
                 text = buildAnnotatedString {
-                    append("Made with ")
-                    withStyle(style = SpanStyle(color = Purple500)) {
-                        append("FakeStoreApi")
-                    }
+                    append("Made with FakeStoreApi")
                 }
             )
         }

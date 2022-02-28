@@ -26,7 +26,9 @@ fun ErrorCard(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = error, style = MaterialTheme.typography.body1, fontSize = 22.sp,
+            text = error,
+            style = MaterialTheme.typography.body1,
+            fontSize = 22.sp,
             textAlign = TextAlign.Center
         )
         Spacer(Modifier.height(15.dp))

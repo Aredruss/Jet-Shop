@@ -46,16 +46,24 @@ fun OnBoardingScreen(
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = "Hi!", style = MaterialTheme.typography.h1)
-            Text(text = "Let's get to know each other", style = MaterialTheme.typography.h2)
+            Text(
+                text = "Hi!",
+                style = MaterialTheme.typography.h1,
+                color = MaterialTheme.colors.onSurface
+            )
+            Text(text = "Let's get to know each other", style = MaterialTheme.typography.h2,
+                color = MaterialTheme.colors.onSurface)
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "Jet-shop is a sample app", style = MaterialTheme.typography.h3)
+            Text(text = "Jet-shop is a sample app", style = MaterialTheme.typography.h3,
+                color = MaterialTheme.colors.onSurface)
             Text(
                 text = "Those products are not real, you can't buy them.\nI'm sorry.",
-                style = MaterialTheme.typography.h3
+                style = MaterialTheme.typography.h3,
+                color = MaterialTheme.colors.onSurface
             )
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "Let's dive in", style = MaterialTheme.typography.h3)
+            Text(text = "Let's dive in", style = MaterialTheme.typography.h3,
+                color = MaterialTheme.colors.onSurface)
             Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),

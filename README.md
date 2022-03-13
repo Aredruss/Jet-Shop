@@ -1,9 +1,14 @@
 ## JET-SHOP
 
 Jet-Shop is a sample app I wrote to test out Jetpack Compose. 
+It's acts as a mobile catalog for a shop which specializes in... well, nothing, really.
+I use [FakeStore API](https://fakestoreapi.com/) for sample data, so don't expect the selection other retailers are able to provide you with.
 
 Here's to the future of Android Development!
 (And, I hope, multi-platform mobile app developing someday :robot: :apple:)
+
+### Try it out 	:secret:
+Grab the latest version from [here](https://github.com/Aredruss/Jet-Shop/releases/tag/v1.0)
 
 ### Built With :toolbox:
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.

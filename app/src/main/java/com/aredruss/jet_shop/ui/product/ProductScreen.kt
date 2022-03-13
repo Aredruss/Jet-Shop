@@ -19,6 +19,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import com.aredruss.jet_shop.ui.common.ErrorCard
+import com.aredruss.jet_shop.ui.common.Loader
 import com.aredruss.jet_shop.ui.theme.Purple500
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -30,50 +32,60 @@ fun ProductScreen(productId: String) {
     val productState by productViewModel.productState.collectAsState()
 
     Surface {
-        Scaffold(
-            topBar = {
-
-            }, content = {
-                Column {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(5.dp),
-                        painter = rememberImagePainter(productState.product?.image),
-                        contentDescription = productState.product?.title,
-                        alignment = Alignment.Center
-                    )
-                    Text(
-                        modifier = Modifier
-                            .background(Purple500)
-                            .padding(20.dp),
-                        text = productState.product?.title ?: "Product",
-                        style = androidx.compose.material.MaterialTheme.typography.h3,
-                        fontSize = 22.sp,
-                        textAlign = TextAlign.Center,
-                        color = Color.White
-                    )
-
-                    Text(
-                        modifier = Modifier.padding(
-                            top = 20.dp, bottom = 0.dp, start = 10.dp, end = 10.dp
-                        ),
-                        text = "${productState.product?.price}$",
-                        style = androidx.compose.material.MaterialTheme.typography.h1,
-                        fontSize = 24.sp,
-                        textAlign = TextAlign.Start
-                    )
-                    Text(
-                        modifier = Modifier.padding(
-                            top = 5.dp, bottom = 0.dp, start = 10.dp, end = 10.dp
-                        ),
-                        text = productState.product?.description ?: "A new product",
-                        style = androidx.compose.material.MaterialTheme.typography.body2,
-                        fontSize = 14.sp,
-                        textAlign = TextAlign.Justify
-                    )
+        Scaffold(content = {
+            Column {
+                when {
+                    productState.loading -> Loader()
+                    productState.error -> {
+                        ErrorCard(
+                            error = productState.message ?: "Something went wrong",
+                            action = productViewModel::getProduct
+                        )
+                    }
+                    else -> {
+                        Image(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(2f)
+                                .padding(15.dp),
+                            painter = rememberImagePainter(productState.product?.image),
+                            contentDescription = productState.product?.title,
+                            alignment = Alignment.Center
+                        )
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Purple500)
+                                .padding(20.dp),
+                            text = productState.product?.title ?: "Product",
+                            style = androidx.compose.material.MaterialTheme.typography.h3,
+                            fontSize = 22.sp,
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    top = 20.dp, bottom = 0.dp, start = 10.dp, end = 10.dp
+                                ),
+                            text = "${productState.product?.price}$",
+                            style = androidx.compose.material.MaterialTheme.typography.h1,
+                            fontSize = 24.sp,
+                            textAlign = TextAlign.Start
+                        )
+                        Text(
+                            modifier = Modifier.padding(
+                                top = 5.dp, bottom = 10.dp, start = 10.dp, end = 10.dp
+                            ),
+                            text = productState.product?.description ?: "A new product",
+                            style = androidx.compose.material.MaterialTheme.typography.body2,
+                            fontSize = 14.sp,
+                            textAlign = TextAlign.Justify
+                        )
+                    }
                 }
-            })
+            }
+        })
     }
-
 }

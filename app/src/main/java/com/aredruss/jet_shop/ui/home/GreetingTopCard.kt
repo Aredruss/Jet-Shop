@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun GreetingTopCard() {
+fun GreetingTopCard(name: String) {
     Surface(
         color = MaterialTheme.colors.primaryVariant,
         modifier = Modifier.fillMaxWidth(),
@@ -24,7 +24,7 @@ fun GreetingTopCard() {
         ) {
             Column {
                 Text(
-                    text = "Hello, Alex",
+                    text = "Hello, $name",
                     style = MaterialTheme.typography.h1,
                     color = Color.White
                 )

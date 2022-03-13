@@ -14,12 +14,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -42,7 +44,7 @@ fun OnBoardingScreen(
         Column(
             modifier = Modifier
                 .background(MaterialTheme.colors.primaryVariant)
-                .padding(45.dp)
+                .padding(horizontal = 45.dp, vertical = 10.dp)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Center
         ) {
@@ -51,19 +53,25 @@ fun OnBoardingScreen(
                 style = MaterialTheme.typography.h1,
                 color = MaterialTheme.colors.onSurface
             )
-            Text(text = "Let's get to know each other", style = MaterialTheme.typography.h2,
-                color = MaterialTheme.colors.onSurface)
+            Text(
+                text = "Let's get to know each other", style = MaterialTheme.typography.h2,
+                color = MaterialTheme.colors.onSurface
+            )
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "Jet-shop is a sample app", style = MaterialTheme.typography.h3,
-                color = MaterialTheme.colors.onSurface)
+            Text(
+                text = "Jet-shop is a sample app", style = MaterialTheme.typography.h3,
+                color = MaterialTheme.colors.onSurface
+            )
             Text(
                 text = "Those products are not real, you can't buy them.\nI'm sorry.",
                 style = MaterialTheme.typography.h3,
                 color = MaterialTheme.colors.onSurface
             )
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "Let's dive in", style = MaterialTheme.typography.h3,
-                color = MaterialTheme.colors.onSurface)
+            Text(
+                text = "Let's dive in", style = MaterialTheme.typography.h3,
+                color = MaterialTheme.colors.onSurface
+            )
             Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
@@ -76,12 +84,15 @@ fun OnBoardingScreen(
                     input = value
                     prefs.onBoardingShown = true
                     prefs.userName = input.ifEmpty { "User" }
-                }, keyboardActions = KeyboardActions(
+                },
+                keyboardActions = KeyboardActions(
                     onDone = {
                         localFocusManager.clearFocus()
                     }
+                ), colors =  TextFieldDefaults.outlinedTextFieldColors(
+                    textColor = Color.White
                 ))
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.weight(1f))
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {

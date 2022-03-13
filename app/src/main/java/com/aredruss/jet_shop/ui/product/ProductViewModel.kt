@@ -3,7 +3,6 @@ package com.aredruss.jet_shop.ui.product
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aredruss.jet_shop.data.model.Product
-import com.aredruss.jet_shop.domain.BasketRepository
 import com.aredruss.jet_shop.domain.ProductRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +11,6 @@ import kotlinx.coroutines.launch
 
 class ProductViewModel(
     private val productId: String,
-    private val basketRepo: BasketRepository,
     private val productRepo: ProductRepository
 ) : ViewModel() {
 

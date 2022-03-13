@@ -11,9 +11,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.aredruss.jet_shop.domain.ShopPreferences
 import com.aredruss.jet_shop.ui.common.ErrorCard
 import com.aredruss.jet_shop.ui.common.Loader
 import com.aredruss.jet_shop.ui.theme.JetShopTheme
+import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -23,6 +25,7 @@ fun HomeScreen(
 ) {
     val homeViewModel = getViewModel<HomeViewModel>()
     val homeState: HomeState by homeViewModel.homeState.collectAsState()
+    val prefs = get<ShopPreferences>()
 
     BackHandler {
         finishAction()
@@ -34,7 +37,7 @@ fun HomeScreen(
     ) {
         Scaffold(
             topBar = {
-                GreetingTopCard()
+                GreetingTopCard(name = prefs.userName ?: "User")
             },
             content = {
                 when {

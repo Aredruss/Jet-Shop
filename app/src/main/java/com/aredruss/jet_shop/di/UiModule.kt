@@ -21,8 +21,7 @@ val uiModule = module {
     viewModel { (productId: String) ->
         ProductViewModel(
             productId = productId,
-            productRepo = get(),
-            basketRepo = get()
+            productRepo = get()
         )
     }
 }
